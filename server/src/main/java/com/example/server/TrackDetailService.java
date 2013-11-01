@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrackDetailService {
 
-   private final Map<String, TrackDetail> trackDetailCache = new HashMap<>();
+   private final Map<String, TrackDetail> trackDetailCache = new HashMap<String, TrackDetail>();
    private final ObjectMapper objectMapper = new ObjectMapper();
    private final HttpClient httpClient = new DefaultHttpClient();
 

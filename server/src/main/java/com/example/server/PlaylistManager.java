@@ -18,12 +18,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlaylistManager {
 
-   private final List<Track> tracks = new ArrayList<>();
+   private final List<Track> tracks = new ArrayList<Track>();
    private Track playing = null;
 
    public List<Track> getTracks() {
       synchronized (tracks) {
-         return new ArrayList<>(tracks);
+         return new ArrayList<Track>(tracks);
       }
    }
 
