@@ -10,6 +10,7 @@ public class TrackDetail {
 
    private String title;
    private String artist;
+   private String album;
 
    @XmlElement
    public String getTitle() {
@@ -27,5 +28,14 @@ public class TrackDetail {
 
    public void setArtist(String artist) {
       this.artist = artist;
+   }
+
+   @XmlElement
+   public String getAlbum() {
+      return album;
+   }
+
+   public void setAlbum(String album) {
+      this.album = album;
    }
 }
