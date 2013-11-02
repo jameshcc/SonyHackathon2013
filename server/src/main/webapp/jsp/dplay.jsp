@@ -181,13 +181,15 @@ Author     : Jagadeesh
 
             function vote(cell)
             {
-                MyJavaScriptClass.vote("id");
+                var id = cell.getAttribute('alt');
+                MyJavaScriptClass.vote(id);
                 alert('Your vote has been registred');
             }
 
             function addtrack(cell)
             {
-                MyJavaScriptClass.addTrack("id");
+                var id = cell.getAttribute('alt');
+                MyJavaScriptClass.addTrack(id);
                 alert('Your request has been processed, reload the playlist to se if your song was added.');
             }
 

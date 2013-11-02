@@ -40,18 +40,16 @@ public class TrackService
         
         
     	Tracks tracks = new Tracks();
-        tracks.setTracks(service.getPlaylist().getTracks());
-        /*Track track = new Track();
+        Track track = new Track();
     	track.setId("theid");
     	track.setTitle("thetitle");
     	Track track2 = new Track();
     	track.setArtist("Theartist");
     	track2.setId("theid2");
     	track2.setTitle("thetitle2");
-    	Tracks tracks = new Tracks();
     	tracks.getTracks().add(track);
     	tracks.getTracks().add(track2);
-    	track2.setArtist("Theartist");*/
+    	track2.setArtist("Theartist");
         return tracks;
     }
     
