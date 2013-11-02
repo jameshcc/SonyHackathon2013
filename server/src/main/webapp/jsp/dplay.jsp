@@ -19,12 +19,13 @@ Author     : Jagadeesh
 
         <style>
             
-            #doc ::-webkit-scrollbar{width:9px;height:9px;}
-            #doc ::-webkit-scrollbar-button:start:decrement,#doc ::-webkit-scrollbar-button:end:increment{display:block;height:0;background-color:transparent;}
-            #doc ::-webkit-scrollbar-track-piece{background-color:#FAFAFA;-webkit-border-radius:0;-webkit-border-bottom-right-radius:8px;-webkit-border-bottom-left-radius:8px;}
-            #doc ::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;-webkit-border-radius:8px;}
-            #doc ::-webkit-scrollbar-thumb:horizontal{width:50px;background-color:#999;-webkit-border-radius:8px;}
+            ::-webkit-scrollbar{width:9px;height:9px;}
+            ::-webkit-scrollbar-button:start:decrement,#doc ::-webkit-scrollbar-button:end:increment{display:block;height:0;background-color:transparent;}
+            ::-webkit-scrollbar-track-piece{background-color:#FAFAFA;-webkit-border-radius:0;-webkit-border-bottom-right-radius:8px;-webkit-border-bottom-left-radius:8px;}
+            ::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;-webkit-border-radius:8px;}
+            ::-webkit-scrollbar-thumb:horizontal{width:50px;background-color:#999;-webkit-border-radius:8px;}
 
+            
             table{
                 border-width: 0 0 1px 0px;
                 border-spacing: 0;
@@ -115,9 +116,8 @@ Author     : Jagadeesh
             }
 
             .search{
-                width:200px;
                 float:left;
-                width: 250px;
+                width: 300px;
                 font-size:12px;
                 margin: 10px;
                 border-right: 1px solid #666;
@@ -125,7 +125,7 @@ Author     : Jagadeesh
 
             .playlist{
                 float: left;
-                width: 300px;
+                width: 350px;
                 margin: 10px;
                 font-size:12px;
             }
@@ -137,7 +137,8 @@ Author     : Jagadeesh
 
             .tablediv{
                 height:300px;
-                overflow:auto;
+                overflow-x: hidden;
+                overflow-y:auto;
             }
 
 
@@ -261,7 +262,6 @@ Author     : Jagadeesh
             function reloadPlaylist(str)
             {
                 MyJavaScriptClass.getPlaylist(handleplaylist);
-                alert("The playlist has been updated");
             }
             
             function reloadPlaylistsilent()
@@ -334,7 +334,7 @@ Author     : Jagadeesh
                     <div class='playlist'>
                         <h3>Songs currently on the playlist.</h3>
                         <div class="tablediv">
-                        <TABLE class="tableclass" width="300px" id="dataTable" width="350px"  style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
+                        <TABLE class="tableclass" width="300px" id="dataTable" style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
                             <TR>
                                 <TH style="border-bottom:1px"> Artist </TH>
                                 <TH> Song </TH>
