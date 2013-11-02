@@ -38,11 +38,11 @@ public class TrackService {
 //      return tracks;
    }
 
-   public void vote(String id) {
+   public void vote(String id)throws IOException{
       playlistManager.vote(id);
    }
 
-   public void addTrack(String id) {
+   public void addTrack(String id)throws IOException{
       playlistManager.vote(id);
    }
 }
