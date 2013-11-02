@@ -277,8 +277,11 @@ Author     : Jagadeesh
             }
 
             function handletracks(obj, tableid, add) {
-                document.getElementById('nowPlayingTitle').textContent = obj.playing.title;
-                document.getElementById('nowPlayingArtist').textContent = obj.playing.artist;
+                playing = obj.playing;
+                if (playing != null) {
+                   document.getElementById('nowPlayingTitle').textContent = obj.playing.title;
+                   document.getElementById('nowPlayingArtist').textContent = obj.playing.artist;
+                }
                 var myStringArray = obj.tracks;
 
                 //Delete old rows except header
