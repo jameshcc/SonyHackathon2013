@@ -20,7 +20,7 @@ Author     : Jagadeesh
         <style>
             
             ::-webkit-scrollbar{width:9px;height:9px;}
-            ::-webkit-scrollbar-button:start:decrement,#doc ::-webkit-scrollbar-button:end:increment{display:block;height:0;background-color:transparent;}
+            ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment{display:block;height:0;background-color:transparent;}
             ::-webkit-scrollbar-track-piece{background-color:#FAFAFA;-webkit-border-radius:0;-webkit-border-bottom-right-radius:8px;-webkit-border-bottom-left-radius:8px;}
             ::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;-webkit-border-radius:8px;}
             ::-webkit-scrollbar-thumb:horizontal{width:50px;background-color:#999;-webkit-border-radius:8px;}
@@ -145,7 +145,6 @@ Author     : Jagadeesh
         </style>
 
         <script>
-
 
             function addRow(tableID, artist, track, votes, id, add) {
 
@@ -299,9 +298,15 @@ Author     : Jagadeesh
                 }
             }
 
+            function init() {
+               getPlaylist();
+               document.getElementById('searchfield').focus();
+               window.setInterval(getPlaylist, 5000);
+            }
+
         </script>
     </head>
-    <body onload="getPlaylist()">
+    <body onload="init()">
 
         <div id="container">
             <div id="header">
