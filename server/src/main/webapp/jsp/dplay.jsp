@@ -18,6 +18,13 @@ Author     : Jagadeesh
         </script>
 
         <style>
+            
+            #doc ::-webkit-scrollbar{width:9px;height:9px;}
+            #doc ::-webkit-scrollbar-button:start:decrement,#doc ::-webkit-scrollbar-button:end:increment{display:block;height:0;background-color:transparent;}
+            #doc ::-webkit-scrollbar-track-piece{background-color:#FAFAFA;-webkit-border-radius:0;-webkit-border-bottom-right-radius:8px;-webkit-border-bottom-left-radius:8px;}
+            #doc ::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#999;-webkit-border-radius:8px;}
+            #doc ::-webkit-scrollbar-thumb:horizontal{width:50px;background-color:#999;-webkit-border-radius:8px;}
+
             table{
                 border-width: 0 0 1px 0px;
                 border-spacing: 0;
@@ -130,7 +137,7 @@ Author     : Jagadeesh
 
             .tablediv{
                 height:300px;
-                overflow:scroll;
+                overflow:auto;
             }
 
 
@@ -313,7 +320,7 @@ Author     : Jagadeesh
                         <button onclick="search()">submit</button>
                         <br/><br/>
                         <div class="tablediv">
-                        <TABLE width="200px"  id="searchtable" width="350px" border="0" style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
+                        <TABLE width="200px"  id="searchtable" border="0" style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
                             <TR>
                                 <TH> Artist </TH>
                                 <TH> Song </TH>
