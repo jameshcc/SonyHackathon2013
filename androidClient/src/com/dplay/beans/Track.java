@@ -37,7 +37,7 @@ public class Track {
 	
 	public Track(String json) throws JSONException {
 		
-		System.out.println("semmelway:: response=" + json);
+		//System.out.println("semmelway:: response=" + json);
 		
 		
 		JSONObject jsonTrack = new JSONObject(json);
