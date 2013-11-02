@@ -15,17 +15,16 @@ import org.springframework.stereotype.Component;
  * @author James
  */
 @Component
-@Path("/oldservice")
+@Path("/")
 @Produces("application/json")
 public class PlayService {
 
-//   @Autowired
+   @Autowired
    private PlaylistManager playlistManager;
 
-//   @Autowired
+   @Autowired
    private TrackDetailService trackDetailService;
 
-//   @Path("playlist")
    @GET
    public Tracks getPlaylist() {
       return playlistManager.getPlaylist();

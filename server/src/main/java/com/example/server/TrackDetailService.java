@@ -22,9 +22,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrackDetailService {
 
-   private final Map<String, TrackDetail> trackDetailCache = new HashMap<String, TrackDetail>();
-   private final ObjectMapper objectMapper = new ObjectMapper();
-   private final HttpClient httpClient = new DefaultHttpClient();
+   private static final Map<String, TrackDetail> trackDetailCache = new HashMap<String, TrackDetail>();
+   private static final ObjectMapper objectMapper = new ObjectMapper();
+   private static final HttpClient httpClient = new DefaultHttpClient();
 
    public Tracks search(String query) throws IOException {
       Tracks tracks = new Tracks();

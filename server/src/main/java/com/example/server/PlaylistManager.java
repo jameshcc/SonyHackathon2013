@@ -12,19 +12,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author James
  */
-//@Component
+@Component
 public class PlaylistManager {
 
    private static final List<Track> tracks = new ArrayList<Track>();
    private static Track playing = null;
    private final TrackDetailService trackDetailService;
 
-//   @Autowired
+   @Autowired
    public PlaylistManager(TrackDetailService trackDetailService) {
       this.trackDetailService = trackDetailService;
    }
