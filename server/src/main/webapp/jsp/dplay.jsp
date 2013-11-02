@@ -7,7 +7,7 @@ Author     : Jagadeesh
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dwr Example</title>
+        <title>dPlay</title>
         <!-- You have to include these two JavaScript files from DWR -->
         <script type='text/javascript' src='../dwr/engine.js'></script>
         <script type='text/javascript' src='../dwr/util.js'></script>
@@ -128,6 +128,10 @@ Author     : Jagadeesh
                 font-size:12px;
             }
 
+            .tablediv{
+                height:300px;
+                overflow:scroll;
+            }
 
 
 
@@ -186,15 +190,22 @@ Author     : Jagadeesh
             function vote(cell)
             {
                 var id = cell.getAttribute('alt');
-                MyJavaScriptClass.vote(id);
-                alert('Your vote has been registred');
+                MyJavaScriptClass.vote(id, handlevote);
+                //setTimeout(function(){reloadPlaylistsilent()},1000)
+                
             }
+             
+             function handlevote()
+            {
+                reloadPlaylistsilent();
+            }
+
 
             function addtrack(cell)
             {
                 var id = cell.getAttribute('alt');
                 MyJavaScriptClass.addTrack(id);
-                alert('Your request has been processed, reload the playlist to se if your song was added.');
+                reloadPlaylistsilent();
             }
 
             function getTrack()
@@ -245,6 +256,12 @@ Author     : Jagadeesh
                 MyJavaScriptClass.getPlaylist(handleplaylist);
                 alert("The playlist has been updated");
             }
+            
+            function reloadPlaylistsilent()
+            {
+                MyJavaScriptClass.getPlaylist(handleplaylist);
+            }
+            
 
             function handlesearch(obj) {
                 handletracks(obj, 'searchtable', 1);
@@ -295,6 +312,7 @@ Author     : Jagadeesh
                         <input id="searchfield" type="text" name="search"/>
                         <button onclick="search()">submit</button>
                         <br/><br/>
+                        <div class="tablediv">
                         <TABLE width="200px"  id="searchtable" width="350px" border="0" style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
                             <TR>
                                 <TH> Artist </TH>
@@ -302,11 +320,13 @@ Author     : Jagadeesh
                                 <TH> Add </TH>
                             </TR>
                         </TABLE>
+                        </div>    
 
                     </div>
 
                     <div class='playlist'>
                         <h3>Songs currently on the playlist.</h3>
+                        <div class="tablediv">
                         <TABLE class="tableclass" width="300px" id="dataTable" width="350px"  style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
                             <TR>
                                 <TH style="border-bottom:1px"> Artist </TH>
@@ -315,6 +335,7 @@ Author     : Jagadeesh
                                 <TH> Vote</TH>
                             </TR>
                         </TABLE>
+                        </div>   
                         <img src="../img/reload.png" onClick="reloadPlaylist()" height="20" width="20">Reload<img/>
                     </div>
 
