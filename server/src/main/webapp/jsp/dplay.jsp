@@ -277,6 +277,8 @@ Author     : Jagadeesh
             }
 
             function handletracks(obj, tableid, add) {
+                document.getElementById('nowPlayingTitle').textContent = obj.playing.title;
+                document.getElementById('nowPlayingArtist').textContent = obj.playing.artist;
                 var myStringArray = obj.tracks;
 
                 //Delete old rows except header
@@ -336,6 +338,7 @@ Author     : Jagadeesh
                     </div>
 
                     <div class='playlist'>
+                       <h3>Now playing <span id="nowPlayingTitle"></span> by <span id="nowPlayingArtist"></span></h3>
                         <h3>Songs currently on the playlist.</h3>
                         <div class="tablediv">
                         <TABLE class="tableclass" width="300px" id="dataTable" style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">

@@ -70,7 +70,7 @@ public class PlaylistManager {
    public Tracks getPlaylist() {
       Tracks playlist = new Tracks();
       playlist.setTracks(getTracks());
-      playlist.setPlaying(playlist.getPlaying());
+      playlist.setPlaying(playing);
       return playlist;
    }
 
