@@ -1,5 +1,6 @@
 package com.dplay;
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -268,7 +269,36 @@ public class Play extends Activity implements OnClickListener, OnPlayerProgressL
 		protected Long doInBackground(Void... v) {
 			String id;
 			try {
-			JSONObject responseObject = new JSONObject(Http.get("http://ec2-54-229-66-8.eu-west-1.compute.amazonaws.com/server/playnext", null));
+				String response;
+				try {
+					response = Http.get("http://54.229.66.8/server/api/playnext", null);
+				} catch(UnknownHostException u) {
+					try {
+						response = Http.get("http://54.229.66.8/server/api/playnext", null);
+					} catch(UnknownHostException uu) {
+						
+						try {
+							response = Http.get("http://54.229.66.8/server/api/playnext", null);
+						} catch(UnknownHostException uuu) {
+							
+							response = Http.get("http://54.229.66.8/server/api/playnext", null);
+							
+							
+						}
+						
+						
+					}
+					
+					
+					
+				}
+				
+				
+				
+				
+				System.out.println("semmelway:: "+ response);
+				
+			JSONObject responseObject = new JSONObject(response);
 			
 			id = responseObject.getString("id");
 			} catch(Exception e) {
@@ -325,7 +355,7 @@ public class Play extends Activity implements OnClickListener, OnPlayerProgressL
 			
 //			if (track.getStream() == null) {
 				player.init(track.getId(), track.getPreview());
-				currentSongLength = 20000;
+				currentSongLength = 25000;
 //			} else {
 //				System.out.println("init, stream=" + track.getStream());
 //				player.init(track.getId(), track.getStream());
