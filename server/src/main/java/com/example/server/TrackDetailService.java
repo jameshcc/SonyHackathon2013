@@ -1,11 +1,11 @@
 package com.example.server;
 
+import com.dwr.service.Track;
+import com.dwr.service.Tracks;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -26,8 +26,8 @@ public class TrackDetailService {
    private final ObjectMapper objectMapper = new ObjectMapper();
    private final HttpClient httpClient = new DefaultHttpClient();
 
-   public List<String> search(String query) throws IOException {
-      List<String> ids = new ArrayList<String>();
+   public Tracks search(String query) throws IOException {
+      Tracks tracks = new Tracks();
       String url = java.net.URLEncoder.encode(query, "ISO-8859-1");
       HttpGet httpget = new HttpGet("http://api.deezer.com/search?q=" + url);
       HttpResponse response = httpClient.execute(httpget);
@@ -36,10 +36,14 @@ public class TrackDetailService {
          JsonNode node = objectMapper.readTree(is);
          Iterator<JsonNode> iterator = node.get("data").getElements();
          while (iterator.hasNext()) {
+            Track track = new Track();
             JsonNode trackNode = iterator.next();
-            ids.add(trackNode.get("id").asText());
+            track.setId(trackNode.get("id").asText());
+            track.setTitle(trackNode.get("title").asText());
+            track.setArtist(trackNode.get("artist").get("name").asText());
+            tracks.getTracks().add(track);
          }
-         return ids;
+         return tracks;
       } finally {
          is.close();
       }

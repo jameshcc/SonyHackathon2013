@@ -5,21 +5,29 @@
  */
 package com.example.server;
 
+import com.dwr.service.Track;
+import com.dwr.service.Tracks;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author James
  */
-@Component
+//@Component
 public class PlaylistManager {
 
-   private final List<Track> tracks = new ArrayList<Track>();
-   private Track playing = null;
+   private static final List<Track> tracks = new ArrayList<Track>();
+   private static Track playing = null;
+   private final TrackDetailService trackDetailService;
+
+//   @Autowired
+   public PlaylistManager(TrackDetailService trackDetailService) {
+      this.trackDetailService = trackDetailService;
+   }
 
    public List<Track> getTracks() {
       synchronized (tracks) {
@@ -27,7 +35,7 @@ public class PlaylistManager {
       }
    }
 
-   public void vote(String deezerId) {
+   public void vote(String deezerId) throws IOException {
       synchronized (tracks) {
          boolean found = false;
          for (Track track : tracks) {
@@ -39,8 +47,11 @@ public class PlaylistManager {
          }
          if (!found) {
             Track track = new Track();
+            TrackDetail trackDetail = trackDetailService.get(deezerId);
             track.setId(deezerId);
             track.setVotes(1);
+            track.setTitle(trackDetail.getTitle());
+            track.setArtist(trackDetail.getArtist());
             tracks.add(track);
          }
          Collections.sort(tracks, new Comparator<Track>() {
@@ -54,8 +65,8 @@ public class PlaylistManager {
       }
    }
 
-   public Playlist getPlaylist() {
-      Playlist playlist = new Playlist();
+   public Tracks getPlaylist() {
+      Tracks playlist = new Tracks();
       playlist.setTracks(getTracks());
       playlist.setPlaying(playlist.getPlaying());
       return playlist;

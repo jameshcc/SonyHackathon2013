@@ -26,6 +26,8 @@ Author     : Jagadeesh
 
             }
 
+            
+
             td{
                 margin: 0;
                 padding: 4px;
@@ -106,7 +108,7 @@ Author     : Jagadeesh
             }
 
             .search{
-                width:100px;
+                width:200px;
                 float:left;
                 width: 250px;
                 font-size:12px;
@@ -134,7 +136,7 @@ Author     : Jagadeesh
         <script>
 
 
-            function addRow(tableID, artist, track, id, add) {
+            function addRow(tableID, artist, track, votes, id, add) {
 
 
 
@@ -153,8 +155,10 @@ Author     : Jagadeesh
                 var cell3 = row.insertCell(1);
                 cell3.innerHTML = track;
 
-
                 var cell4 = row.insertCell(2);
+                cell4.innerHTML = votes;
+
+                var cell5 = row.insertCell(3);
 
                 var oImg = document.createElement("img");
                 if (add == 1) {
@@ -169,7 +173,7 @@ Author     : Jagadeesh
 
 
                 oImg.setAttribute('alt', id);
-                cell4.appendChild(oImg);
+                cell5.appendChild(oImg);
                 /*
                  var a = document.createElement('a');
                  a.href =  "#";
@@ -224,7 +228,7 @@ Author     : Jagadeesh
         //using object.propertyname
             }
 
-            function search(str)
+            function search()
             {
                 var query = DWRUtil.getValue("searchfield");
                 MyJavaScriptClass.search(query, handlesearch);
@@ -263,7 +267,11 @@ Author     : Jagadeesh
 
                 // Add new rows
                 for (var i = 0; i < myStringArray.length; i++) {
-                    addRow(tableid, myStringArray[i].artist, myStringArray[i].title, myStringArray[i].id, add);
+                   if (add) {
+                    addRow(tableid, myStringArray[i].artist, myStringArray[i].title, null, myStringArray[i].id, add);
+                   } else {
+                    addRow(tableid, myStringArray[i].artist, myStringArray[i].title, myStringArray[i].votes, myStringArray[i].id, add);
+                   }
                     //Do something
                 }
             }
@@ -285,7 +293,7 @@ Author     : Jagadeesh
                         <h3>Search for songs to add to the playlist.</h3>
 
                         <input id="searchfield" type="text" name="search"/>
-                        <button onclick="search('testtrack')">submit</button>
+                        <button onclick="search()">submit</button>
                         <br/><br/>
                         <TABLE width="200px"  id="searchtable" width="350px" border="0" style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
                             <TR>
@@ -299,10 +307,11 @@ Author     : Jagadeesh
 
                     <div class='playlist'>
                         <h3>Songs currently on the playlist.</h3>
-                        <TABLE class="tableclass" width="200px" id="dataTable" width="350px"  style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
+                        <TABLE class="tableclass" width="300px" id="dataTable" width="350px"  style="font-family:Times New Roman, Times, serif;color:black;font-size:14px;">
                             <TR>
                                 <TH style="border-bottom:1px"> Artist </TH>
                                 <TH> Song </TH>
+                                <TH> Votes </TH>
                                 <TH> Vote</TH>
                             </TR>
                         </TABLE>

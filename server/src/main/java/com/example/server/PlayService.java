@@ -1,7 +1,8 @@
 package com.example.server;
 
+import com.dwr.service.Track;
+import com.dwr.service.Tracks;
 import java.io.IOException;
-import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,19 +15,19 @@ import org.springframework.stereotype.Component;
  * @author James
  */
 @Component
-@Path("/")
+@Path("/oldservice")
 @Produces("application/json")
 public class PlayService {
 
-   @Autowired
+//   @Autowired
    private PlaylistManager playlistManager;
 
-   @Autowired
+//   @Autowired
    private TrackDetailService trackDetailService;
 
 //   @Path("playlist")
    @GET
-   public Playlist getPlaylist() {
+   public Tracks getPlaylist() {
       return playlistManager.getPlaylist();
    }
 
@@ -48,14 +49,14 @@ public class PlayService {
 
    @GET
    @Path("vote")
-   public Playlist vote(@QueryParam("deezerId") String deezerId) {
+   public Tracks vote(@QueryParam("deezerId") String deezerId) throws IOException{
       playlistManager.vote(deezerId);
       return playlistManager.getPlaylist();
    }
 
    @GET
    @Path("search")
-   public List<String> search(@QueryParam("query") String query) throws IOException {
+   public Tracks search(@QueryParam("query") String query) throws IOException {
       return trackDetailService.search(query);
    }
 
