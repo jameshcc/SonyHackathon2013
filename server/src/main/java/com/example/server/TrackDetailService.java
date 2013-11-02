@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.example.server;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -28,6 +26,25 @@ public class TrackDetailService {
    private final ObjectMapper objectMapper = new ObjectMapper();
    private final HttpClient httpClient = new DefaultHttpClient();
 
+   public List<String> search(String query) throws IOException {
+      List<String> ids = new ArrayList<String>();
+      String url = java.net.URLEncoder.encode(query, "ISO-8859-1");
+      HttpGet httpget = new HttpGet("http://api.deezer.com/search?q=" + url);
+      HttpResponse response = httpClient.execute(httpget);
+      InputStream is = response.getEntity().getContent();
+      try {
+         JsonNode node = objectMapper.readTree(is);
+         Iterator<JsonNode> iterator = node.get("data").getElements();
+         while (iterator.hasNext()) {
+            JsonNode trackNode = iterator.next();
+            ids.add(trackNode.get("id").asText());
+         }
+         return ids;
+      } finally {
+         is.close();
+      }
+   }
+
    public synchronized TrackDetail get(String id) throws IOException {
       TrackDetail trackDetail = trackDetailCache.get(id);
       if (trackDetail == null) {
@@ -42,9 +59,18 @@ public class TrackDetailService {
       HttpGet getRequest = new HttpGet("http://api.deezer.com/track/" + id);
       HttpResponse response = httpClient.execute(getRequest);
       TrackDetail trackDetail = new TrackDetail();
-      JsonNode parentNode = objectMapper.readTree(response.getEntity().getContent());
-      trackDetail.setTitle(parentNode.get("title").asText());
-      trackDetail.setArtist(parentNode.get("artist").get("name").asText());
-      return trackDetail;
+      InputStream is = response.getEntity().getContent();
+      try {
+         JsonNode parentNode = objectMapper.readTree(is);
+         trackDetail.setTitle(parentNode.get("title").asText());
+         trackDetail.setArtist(parentNode.get("artist").get("name").asText());
+         JsonNode albumNode = parentNode.get("album");
+         if (albumNode != null) {
+            trackDetail.setAlbum(albumNode.get("title").asText());
+         }
+         return trackDetail;
+      } finally {
+         is.close();
+      }
    }
 }

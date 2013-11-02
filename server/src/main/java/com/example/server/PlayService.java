@@ -1,5 +1,7 @@
 package com.example.server;
 
+import java.io.IOException;
+import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,6 +20,9 @@ public class PlayService {
 
    @Autowired
    private PlaylistManager playlistManager;
+
+   @Autowired
+   private TrackDetailService trackDetailService;
 
 //   @Path("playlist")
    @GET
@@ -46,5 +51,17 @@ public class PlayService {
    public Playlist vote(@QueryParam("deezerId") String deezerId) {
       playlistManager.vote(deezerId);
       return playlistManager.getPlaylist();
+   }
+
+   @GET
+   @Path("search")
+   public List<String> search(@QueryParam("query") String query) throws IOException {
+      return trackDetailService.search(query);
+   }
+
+   @GET
+   @Path("trackdetail")
+   public TrackDetail getTrackDetail(@QueryParam("id") String id) throws IOException {
+      return trackDetailService.get(id);
    }
 }
