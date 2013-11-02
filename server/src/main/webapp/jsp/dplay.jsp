@@ -62,7 +62,7 @@ Author     : Jagadeesh
                 padding-bottom:60px;   /* Height of the footer */
             }
             #footer {
-                position:absolute;
+                float:left;
                 bottom:0;
                 width:100%;
                 height:60px;   /* Height of the footer */
@@ -87,8 +87,7 @@ Author     : Jagadeesh
             }
 
             .maindiv{
-
-                height:300px;
+                height:600px;
                 font-family:"Times New Roman", Times, serif
             }
 
